@@ -1,16 +1,15 @@
 #!/bin/sh
 
-# This program has two features.
+# This program has two feature.
 #
 # 1. Create a disk image on RAM.
 # 2. Mount that disk image.
 #
 # Usage:
-#   $0 <dir> <sector>
+#   $0 <dir> <size>
 #
-#   sector: 
-#     The `sector' is block unit (1 sector = 512 B).
-#     This value used when creat a disk image.
+#   size:
+#     The `size' is a size of disk image (MB).
 #
 #   dir:
 #     The `dir' is a directory, the dir is used to mount the disk image.
@@ -20,7 +19,7 @@
 #
 
 mount_point=${1}
-sectors=${2:-128000}
+size=${2:-64}
 
 mkdir -p $mount_point
 if [ $? -ne 0 ]; then
@@ -28,7 +27,8 @@ if [ $? -ne 0 ]; then
     exit $?
 fi
 
-device_name=$(hdid -nomount "ram://${sectors}" | awk '{print $1}')
+sector=$(expr $size \* 1024 \* 1024 / 512)
+device_name=$(hdid -nomount "ram://${sector}" | awk '{print $1}')
 if [ $? -ne 0 ]; then
     echo "Could not create disk image." >&2
     exit $?
