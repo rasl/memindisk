@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# This program has two feature.
+# This program has two features.
 #
 # 1. Unmount a disk image.
 # 2. Detach the disk image from RAM.

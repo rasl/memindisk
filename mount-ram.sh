@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# This program has two feature.
+# This program has two features.
 #
 # 1. Create a disk image on RAM.
 # 2. Mount that disk image.
